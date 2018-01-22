@@ -22,6 +22,11 @@ $(function() {
     genDrinkList();
 });
 
+window.onload = function(){
+	drinkCanvas = document.getElementById('drink');
+	paper.setup(drinkCanvas);
+}
+
 function colorizeIngredients() {
 	ingredColors["creme de menthe"] = '#058605';
 	ingredColors["creme de cacao"] = '#693D23';
@@ -46,11 +51,12 @@ function colorizeIngredients() {
 	ingredColors["orange juice"] = '#FFB500';
 	ingredColors["cherry"] = '#A60707';
 	ingredColors["ice"] = '#71C4D9';
-    ingredColors["peach schnapps"] = '#E5E5E3';
-    ingredColors["cranberry juice"] = '#D8161F';
-    ingredColors["bourbon"] = '#B15900';
-    ingredColors["cognac"] = '#F8931B';
-    ingredColors["rum"] = '#1B0000';
+  ingredColors["peach schnapps"] = '#E5E5E3';
+  ingredColors["cranberry juice"] = '#D8161F';
+  ingredColors["bourbon"] = '#B15900';
+  ingredColors["cognac"] = '#F8931B';
+  ingredColors["rum"] = '#1B0000';
+	ingredColors["rye whiskey"] = '#000000';
 }
 
 function drawGlass(nameOfGlass) {
@@ -87,33 +93,32 @@ function drawGlass(nameOfGlass) {
 
 //draws a Collins Glass. 3 lines
 function drawCollinsGlass() {
-	ctx.lineWidth = GLASS_WIDTH;
 	TOP_GLASS_Y = 30;
 	BOTTOM_GLASS_Y = 490;
 	LEFT_GLASS_X = 60.5;
 	RIGHT_GLASS_X = 300.5;
-	ctx.beginPath();
-	ctx.moveTo(LEFT_GLASS_X, TOP_GLASS_Y);
-	ctx.lineTo(LEFT_GLASS_X, BOTTOM_GLASS_Y);
-	ctx.lineTo(RIGHT_GLASS_X, BOTTOM_GLASS_Y);
-	ctx.lineTo(RIGHT_GLASS_X, TOP_GLASS_Y);
-	ctx.stroke();
-	ctx.lineWidth = 1;
+	var collinsGlass = new paper.Path();
+	collinsGlass.strokeColor = 'black';
+	collinsGlass.strokeWidth = GLASS_WIDTH;
+	collinsGlass.add(new paper.Point(LEFT_GLASS_X, TOP_GLASS_Y));
+	collinsGlass.add(new paper.Point(LEFT_GLASS_X, BOTTOM_GLASS_Y));
+	collinsGlass.add(new paper.Point(RIGHT_GLASS_X, BOTTOM_GLASS_Y));
+	collinsGlass.add(new paper.Point(RIGHT_GLASS_X, TOP_GLASS_Y));
 }
 
 function drawOldFashionedGlass() {
-	ctx.lineWidth = GLASS_WIDTH;
 	TOP_GLASS_Y = 260;
 	BOTTOM_GLASS_Y = 490;
 	LEFT_GLASS_X = 60.5;
 	RIGHT_GLASS_X = 300.5;
-	ctx.beginPath();
-	ctx.moveTo(LEFT_GLASS_X, TOP_GLASS_Y);
-	ctx.lineTo(LEFT_GLASS_X, BOTTOM_GLASS_Y);
-	ctx.lineTo(RIGHT_GLASS_X, BOTTOM_GLASS_Y);
-	ctx.lineTo(RIGHT_GLASS_X, TOP_GLASS_Y);
-	ctx.stroke();
-	ctx.lineWidth = 1;
+	var oldFashionedGlass = new paper.Path();
+	oldFashionedGlass.strokeColor = 'black';
+	oldFashionedGlass.strokeWidth = GLASS_WIDTH;
+	oldFashionedGlass.add(new paper.Point(LEFT_GLASS_X, TOP_GLASS_Y));
+	oldFashionedGlass.add(new paper.Point(LEFT_GLASS_X, BOTTOM_GLASS_Y));
+	oldFashionedGlass.add(new paper.Point(RIGHT_GLASS_X, BOTTOM_GLASS_Y));
+	oldFashionedGlass.add(new paper.Point(RIGHT_GLASS_X, TOP_GLASS_Y));
+
 }
 
 function drawCocktailGlass() {
@@ -122,17 +127,22 @@ function drawCocktailGlass() {
 	LEFT_GLASS_X = 60.5;
 	RIGHT_GLASS_X = 320.5;
 	BOTTOM_GLASS_Y = 213;
-	ctx.beginPath();
-	ctx.moveTo(LEFT_GLASS_X, TOP_GLASS_Y);
-	ctx.lineTo((RIGHT_GLASS_X - LEFT_GLASS_X)/2 + LEFT_GLASS_X, BOTTOM_GLASS_Y);
-	ctx.lineTo((RIGHT_GLASS_X-LEFT_GLASS_X)/2 + LEFT_GLASS_X, BOTTOM_GLASS_Y);
-	ctx.lineTo(RIGHT_GLASS_X, TOP_GLASS_Y);
-	ctx.moveTo((RIGHT_GLASS_X-LEFT_GLASS_X)/2 + LEFT_GLASS_X, BOTTOM_GLASS_Y);
-	ctx.lineTo((RIGHT_GLASS_X-LEFT_GLASS_X)/2 + LEFT_GLASS_X, BOTTOM_GLASS_Y + 250);
-	ctx.moveTo((RIGHT_GLASS_X-LEFT_GLASS_X)/3 + LEFT_GLASS_X, BOTTOM_GLASS_Y + 250);
-	ctx.lineTo(2*(RIGHT_GLASS_X-LEFT_GLASS_X)/3 + LEFT_GLASS_X, BOTTOM_GLASS_Y + 250);
-	ctx.stroke();
-	ctx.lineWidth = 1;
+	var cocktailGlass1 = new paper.Path;
+	var cocktailGlass2 = new paper.Path;
+	var cocktailGlass3 = new paper.Path;
+	cocktailGlass1.strokeColor = 'black';
+	cocktailGlass1.strokeWidth = GLASS_WIDTH;
+	cocktailGlass1.add(new paper.Point(LEFT_GLASS_X,TOP_GLASS_Y));
+	cocktailGlass1.add(new paper.Point((RIGHT_GLASS_X - LEFT_GLASS_X)/2 + LEFT_GLASS_X,BOTTOM_GLASS_Y));
+	cocktailGlass1.add(new paper.Point(RIGHT_GLASS_X, TOP_GLASS_Y));
+	cocktailGlass2.strokeColor = 'black';
+	cocktailGlass2.strokeWidth = GLASS_WIDTH;
+	cocktailGlass2.add(new paper.Point((RIGHT_GLASS_X-LEFT_GLASS_X)/2 + LEFT_GLASS_X,BOTTOM_GLASS_Y));
+	cocktailGlass2.add(new paper.Point((RIGHT_GLASS_X-LEFT_GLASS_X)/2 + LEFT_GLASS_X, BOTTOM_GLASS_Y + 250));
+	cocktailGlass3.strokeColor = 'black';
+	cocktailGlass3.strokeWidth = GLASS_WIDTH;
+	cocktailGlass3.add(new paper.Point((RIGHT_GLASS_X-LEFT_GLASS_X)/3 + LEFT_GLASS_X,BOTTOM_GLASS_Y + 250));
+	cocktailGlass3.add(new paper.Point(2*(RIGHT_GLASS_X-LEFT_GLASS_X)/3 + LEFT_GLASS_X,BOTTOM_GLASS_Y + 250));
 }
 
 //takes in array with "parts" (n-numbers) Fills the glass with rectangles, size according to parts.
@@ -155,79 +165,62 @@ function drawParts(partsArr, colorArr, textArr) {
 	for (var i = 0; i < partsArr.length; i++) {		//for each of the part
 		thisPartSize = partsArr[i] * eachPartSize;		//this part size is size of the part * the size
 		runningPartTotal = runningPartTotal + partsArr[i]/2;	//update runningPartTotal for text alignment halfway up
-		ctx.fillStyle = 'black';		//text color is black
+		var ingText = new paper.PointText(new paper.Point(textLocation_X,adjustedBottom - runningPartTotal*eachPartSize));
+		ingText.fillColor = 'black';
 		//print name of part at shifted x and halfway up the new part
-		ctx.fillText(textArr[i], textLocation_X, adjustedBottom - runningPartTotal*eachPartSize);
+		ingText.content = textArr[i];
+		var boozeLayer;
 		runningPartTotal = runningPartTotal + partsArr[i]/2;	//finish updating runningPartTotal for part alignment
-		//ctx.fillStyle = 'rgb(' + ingredColors[colorArr[i]][0] + ', ' + ingredColors[colorArr[i]][1] + ', ' + ingredColors[colorArr[i]][2] + ')';		//get color of this part
-		ctx.fillStyle = ingredColors[colorArr[i]];
 		//X: left side plus 1/2 of the width for no overlap, Y: Bottom, then up by number of part, then up by glass width for no overlap
 		if (GLASS == "collins" || GLASS == "old fashioned" || GLASS == "highball" || GLASS == "copper mug") {
-			ctx.fillRect(LEFT_GLASS_X+0.5*GLASS_WIDTH, adjustedBottom - (runningPartTotal * eachPartSize), partWidth, thisPartSize);
+			//Define boozelayer dimentions if rectangle.
+			boozeLayer = new paper.Path.Rectangle(new paper.Point(LEFT_GLASS_X+2,(adjustedBottom - (runningPartTotal)*eachPartSize)+thisPartSize), new paper.Point(RIGHT_GLASS_X-2, adjustedBottom - (runningPartTotal)*eachPartSize));
+			boozeLayer.fillColor = ingredColors[colorArr[i]];
 		} else {
 			y = adjustedBottom - (runningPartTotal * eachPartSize);
 			x = 1.95*GLASS_WIDTH + (y+(13434/260))*(130/183);
-			ctx.beginPath();
-			ctx.moveTo(x,y);
-			ctx.lineTo(-(1.5)*GLASS_WIDTH+(y - (125103/260))*(-130/183), y);
+			boozeLayer = new paper.Path();
+			boozeLayer.add(new paper.Point(x,y));
+			boozeLayer.add(new paper.Point(-(1.5)*GLASS_WIDTH+(y - (125103/260))*(-130/183),y));
 			if (i == 0) {
-				ctx.lineTo((RIGHT_GLASS_X-LEFT_GLASS_X)/2 + LEFT_GLASS_X, y + thisPartSize);
-				ctx.fill();
+				boozeLayer.add(new paper.Point((RIGHT_GLASS_X-LEFT_GLASS_X)/2 + LEFT_GLASS_X, y + thisPartSize));
+				boozeLayer.fillColor = ingredColors[colorArr[i]];
 			} else {
 				var oldY = adjustedBottom-(runningPartTotal*eachPartSize)+thisPartSize;
-				ctx.lineTo(-(1.5)*GLASS_WIDTH+(oldY-(125103/260))*(-130/183), oldY);
-				ctx.lineTo(1.5*GLASS_WIDTH+(oldY+(13434/260))*(130/183),oldY);
-				ctx.fill();
+				boozeLayer.add(new paper.Point(-(1.5)*GLASS_WIDTH+(oldY-(125103/260))*(-130/183),oldY));
+				boozeLayer.add(new paper.Point(1.5*GLASS_WIDTH+(oldY+(13434/260))*(130/183),oldY));
+				boozeLayer.fillColor = ingredColors[colorArr[i]];
 			}
 		}
-		//ctx.beginPath();
-		//y = getY(thisPartSize, numParts, runningPartTotal, eachPartSize, adjustedBottom);
-		//top left
-		//ctx.moveTo(getX(y, 0), y);
-		//top line
-		//ctx.lineTo(getX(y, 1), y);
-		//right line
-		//ctx.lineTo(getX(adjustedBottom - (runningPartTotal-partsArr[i])*eachPartSize, 1), adjustedBottom - (runningPartTotal - partsArr[i])*eachPartSize);
-		//bottom line
-		//ctx.lineTo(getX(adjustedBottom - (runningPartTotal-partsArr[i])*eachPartSize, 0), adjustedBottom - (runningPartTotal - partsArr[i])*eachPartSize);
-		//left line
-		//ctx.lineTo(getX(adjustedBottom - (runningPartTotal*eachPartSize), 0), adjustedBottom - (runningPartTotal * eachPartSize));
-		//ctx.fill();
-		//ctx.stroke();
 	}
-	ctx.fillStyle = 'black';
 }
 
 function addIce() {
-	ctx.fillStyle = ingredColors["ice"];
-	ctx.globalAlpha = 0.5;
-	var iceSize = 100;
-	var iceSizeSmall = 50;
-	//var img = new Image();
-	//img.onload = function() {
-	//	ctx.drawImage(img, LEFT_GLASS_X, BOTTOM_GLASS_Y - iceSize, iceSize, iceSize);
-	//}
-	//img.src = "http://doughertysice.com/wp-content/uploads/2015/01/Ice-Pile-full-screen.jpg";
 	if(GLASS == "collins" || GLASS == "highball" || GLASS == "old fashioned" || GLASS == "copper mug") {
-		moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSize + iceSize*0.5, (Math.PI / 180)*25);
-		ctx.fillRect(LEFT_GLASS_X + 10, BOTTOM_GLASS_Y - iceSize - 25, iceSize, iceSize);
-		moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSize + iceSize*0.5, -(Math.PI / 180)*25);
-		ctx.fillRect(RIGHT_GLASS_X - 103, BOTTOM_GLASS_Y - iceSize, iceSize, iceSize);
+		var iceCube1 = new paper.Path.Rectangle(new paper.Point(LEFT_GLASS_X + 20,BOTTOM_GLASS_Y - iceSize - 17),new paper.Point(LEFT_GLASS_X+iceSize+20,BOTTOM_GLASS_Y-17));
+		iceCube1.fillColor = ingredColors["ice"];
+		iceCube1.fillColor.alpha = 0.5;
+		iceCube1.rotate(25);
+		var iceCube2 = new paper.Path.Rectangle(new paper.Point(RIGHT_GLASS_X-5,BOTTOM_GLASS_Y - iceSize-2),new paper.Point(RIGHT_GLASS_X-iceSize-5,BOTTOM_GLASS_Y-2));
+		iceCube2.fillColor = ingredColors["ice"];
+		iceCube2.fillColor.alpha = 0.5;
 	}
 	if (GLASS == "collins" || GLASS == "highball") {
-		moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSize + iceSize*0.5, -(Math.PI / 180)*25);
-		ctx.fillRect(RIGHT_GLASS_X - 80, BOTTOM_GLASS_Y - 1.45*iceSize - 10, iceSize, iceSize);
-		moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSize + iceSize*0.5, -(Math.PI / 180)*5);
-		ctx.fillRect(LEFT_GLASS_X + 110, BOTTOM_GLASS_Y - 2.5*iceSize + 5, iceSize, iceSize);
-		moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSize + iceSize*0.5, (Math.PI / 180)*30);
+		var iceCube3 = new paper.Path.Rectangle(new paper.Point(LEFT_GLASS_X + 20,BOTTOM_GLASS_Y - 2*iceSize - 77),new paper.Point(LEFT_GLASS_X+iceSize+20,BOTTOM_GLASS_Y-iceSize-77));
+		iceCube3.fillColor = ingredColors["ice"];
+		iceCube3.fillColor.alpha = 0.5;
+		iceCube3.rotate(25);
+		var iceCube4 = new paper.Path.Rectangle(new paper.Point(RIGHT_GLASS_X-20,BOTTOM_GLASS_Y - 2*iceSize-18),new paper.Point(RIGHT_GLASS_X-iceSize-20,BOTTOM_GLASS_Y-iceSize-18));
+		iceCube4.fillColor = ingredColors["ice"];
+		iceCube4.fillColor.alpha = 0.5;
+		iceCube4.rotate(-25);
 	}
 	if (GLASS == "margarita" || GLASS == "cocktail") {
-		moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSizeSmall + iceSizeSmall*0.5, -(Math.PI / 180)*25);
-		ctx.fillRect(RIGHT_GLASS_X - 150, BOTTOM_GLASS_Y + 30 - 1.45*iceSizeSmall, iceSizeSmall, iceSizeSmall);
-		moveAndRotate(LEFT_GLASS_X + 0.5*iceSize, BOTTOM_GLASS_Y - iceSizeSmall + iceSizeSmall*0.5, (Math.PI / 180)*25);
+		var iceCube1 = new paper.Path.Rectangle(new paper.Point(LEFT_GLASS_X + 20,BOTTOM_GLASS_Y - iceSize - 17),new paper.Point(LEFT_GLASS_X+iceSize+20,BOTTOM_GLASS_Y-17));
+		iceCube1.fillColor = ingredColors["ice"];
+		iceCube1.fillColor.alpha = 0.5;
+		iceCube1.rotate(25);
 	}
-	ctx.globalAlpha = 1.0;
-	ctx.fillStyle = 'black';
 }
 
 function moveAndRotate(moveX, moveY, rotateAngle) {
@@ -237,12 +230,13 @@ function moveAndRotate(moveX, moveY, rotateAngle) {
 }
 
 function addStraw() {
+	var straw1 = new paper.Path(new paper.Point(,), new paper.Point(,))
 	ctx.fillRect(RIGHT_GLASS_X - 30, TOP_GLASS_Y - 25, 20, 25+TOP_GAP);
 	ctx.fillRect(RIGHT_GLASS_X - 30, TOP_GLASS_Y - 25, 60, 20);
 }
 
 function reset() {
-	ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+	//Remove everything in the vector object array.
 }
 
 function addLemon(lemIs0_limeIs1_orangeIs2) {
