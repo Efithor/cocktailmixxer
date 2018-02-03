@@ -230,9 +230,12 @@ function moveAndRotate(moveX, moveY, rotateAngle) {
 }
 
 function addStraw() {
-	var straw1 = new paper.Path(new paper.Point(,), new paper.Point(,))
-	ctx.fillRect(RIGHT_GLASS_X - 30, TOP_GLASS_Y - 25, 20, 25+TOP_GAP);
-	ctx.fillRect(RIGHT_GLASS_X - 30, TOP_GLASS_Y - 25, 60, 20);
+	var straw1 = new paper.Path(new paper.Point(RIGHT_GLASS_X - 5,TOP_GLASS_Y - 25), new paper.Point(RIGHT_GLASS_X - 35,TOP_GLASS_Y + 25));
+	straw1.rotate(25);
+	straw1.fillColor = 'blue';
+	straw1.sendToBack();
+	//ctx.fillRect(RIGHT_GLASS_X - 30, TOP_GLASS_Y - 25, 20, 25+TOP_GAP);
+	//ctx.fillRect(RIGHT_GLASS_X - 30, TOP_GLASS_Y - 25, 60, 20);
 }
 
 function reset() {
@@ -240,6 +243,7 @@ function reset() {
 }
 
 function addLemon(lemIs0_limeIs1_orangeIs2) {
+	var fruit = new paper.Path();
 	if (lemIs0_limeIs1_orangeIs2 == 0) {
 		ctx.fillStyle = ingredColors['lemon juice'];
 	} else if (lemIs0_limeIs1_orangeIs2 == 1) {
